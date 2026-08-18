@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLixeira - App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --verde:#20a464;
+    --verde2:#087f45;
+    --fundo:#f4f7f5;
+    --card:#ffffff;
+    --texto:#17221c;
+    --cinza:#78837d;
+    --borda:#e2e8e4;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#dce5df;
+    color:var(--texto);
+}
+
+.app{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    margin:auto;
+    background:var(--fundo);
+    position:relative;
+    overflow:hidden;
+}
+
+/* TOPO */
+
+.topo{
+    height:75px;
+    background:var(--card);
+    border-bottom:1px solid var(--borda);
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo-pequeno{
+    color:var(--verde);
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.topo h1{
+    font-size:22px;
+    margin-top:3px;
+}
+
+.btn-tema{
+    border:none;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#edf5ef;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* TELAS */
+
+.conteudo{
+    padding:20px;
+    padding-bottom:100px;
+}
+
+.tela{
+    display:none;
+    animation:aparecer .25s ease;
+}
+
+.tela.ativa{
+    display:block;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* INÍCIO */
+
+.boas-vindas{
+    background:linear-gradient(135deg,#108b4e,#2dc174);
+    color:white;
+    border-radius:24px;
+    padding:23px;
+    min-height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 10px 25px #20a46433;
+}
+
+.boas-vindas span{
+    font-size:12px;
+}
+
+.boas-vindas h2{
+    font-size:20px;
+    margin:8px 0;
+}
+
+.boas-vindas p{
+    font-size:11px;
+    max-width:250px;
+    line-height:1.5;
+}
+
+.icone-eco{
+    font-size:48px;
+}
+
+.titulo-secao{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:25px 0 13px;
+}
+
+.titulo-secao h2{
+    font-size:17px;
+}
+
+.btn-atualizar{
+    border:none;
+    background:transparent;
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* STATUS */
+
+.grid-status{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+}
+
+.card-status{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:18px;
+    padding:15px;
+}
+
+.icone-status{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.organic{
+    background:#e9f7df;
+}
+
+.reciclavel{
+    background:#dff5e9;
+}
+
+.papel{
+    background:#e8eef8;
+}
+
+.metal{
+    background:#f8eadb;
+}
+
+.card-status h3{
+    font-size:13px;
+    margin-bottom:9px;
+}
+
+.barra{
+    height:6px;
+    background:#edf0ee;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progresso{
+    height:100%;
+    border-radius:10px;
+    transition:.5s;
+}
+
+.p1{background:#65b53e;}
+.p2{background:#20a464;}
+.p3{background:#6384bd;}
+.p4{background:#df9251;}
+
+.porcentagem{
+    display:block;
+    margin-top:6px;
+    color:var(--cinza);
+    font-size:10px;
+}
+
+/* ALERTA */
+
+.alerta{
+    margin-top:15px;
+    padding:14px;
+    background:#fff5e5;
+    border:1px solid #f2ddbd;
+    border-radius:17px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.alerta strong{
+    font-size:13px;
+}
+
+.alerta p{
+    font-size:10px;
+    color:#806d55;
+    margin-top:3px;
+}
+
+/* AÇÕES */
+
+.subtitulo{
+    font-size:17px;
+    margin:25px 0 12px;
+}
+
+.acoes{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+.acao{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:16px;
+    padding:12px 5px;
+    cursor:pointer;
+    color:var(--texto);
+}
+
+.acao:hover{
+    transform:translateY(-2px);
+}
+
+.acao span{
+    display:block;
+    font-size:23px;
+    margin-bottom:5px;
+}
+
+.acao small{
+    font-size:9px;
+}
+
+/* TÍTULO DAS PÁGINAS */
+
+.titulo-pagina{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.titulo-pagina > span{
+    width:48px;
+    height:48px;
+    background:#dff4e8;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.titulo-pagina h2{
+    font-size:21px;
+}
+
+.titulo-pagina p{
+    color:var(--cinza);
+    font-size:10px;
+    margin-top:3px;
+}
+
+/* PESQUISA */
+
+.pesquisa{
+    height:48px;
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.pesquisa input{
+    border:none;
+    outline:none;
+    width:100%;
+    background:transparent;
+    color:var(--texto);
+}
+
+/* MATERIAIS */
+
+.materiais{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.material{
+    background:var(--card);
+    border:1px solid var(--borda);
+    padding:14px;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+}
+
+.material:hover{
+    transform:translateY(-2px);
+}
+
+.material-icone{
+    width:42px;
+    height:42px;
+    background:#edf5ef;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.material-info{
+    flex:1;
+}
+
+.material h3{
+    font-size:13px;
+}
+
+.material p{
+    color:var(--cinza);
+    font-size:10px;
+    margin-top:4px;
+}
+
+/* RELATÓRIOS */
+
+.grande-estatistica{
+    background:linear-gradient(135deg,#10894e,#2cb76e);
+    color:white;
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:13px;
+}
+
+.grande-estatistica span{
+    font-size:11px;
+}
+
+.grande-estatistica strong{
+    display:block;
+    font-size:35px;
+    margin:8px 0;
+}
+
+.grande-estatistica small{
+    font-size:10px;
+}
+
+.grid-estatisticas{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.mini-estatistica{
+    background:var(--card);
+    border:1px solid var(--borda);
+    padding:16px;
+    border-radius:17px;
+}
+
+.mini-estatistica span{
+    font-size:20px;
+}
+
+.mini-estatistica strong{
+    display:block;
+    font-size:18px;
+    margin-top:8px;
+}
+
+.mini-estatistica small{
+    color:var(--cinza);
+    font-size:10px;
+}
+
+.grafico{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:18px;
+    margin-top:13px;
+    padding:18px;
+}
+
+.grafico h3{
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.colunas{
+    height:150px;
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:7px;
+    border-bottom:1px solid var(--borda);
+}
+
+.coluna{
+    height:100%;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:end;
+    align-items:center;
+}
+
+.coluna-barra{
+    width:22px;
+    max-width:100%;
+    background:var(--verde);
+    border-radius:6px 6px 0 0;
+}
+
+.coluna small{
+    font-size:8px;
+    color:var(--cinza);
+    margin-top:7px;
+}
+
+/* MAPA */
+
+.mapa{
+    height:320px;
+    border-radius:22px;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(35deg,transparent 45%,#d0dad3 46%,#d0dad3 50%,transparent 51%),
+        linear-gradient(145deg,transparent 45%,#d0dad3 46%,#d0dad3 50%,transparent 51%),
+        #e8f0e8;
+}
+
+.rua{
+    position:absolute;
+    background:white;
+}
+
+.rua1{
+    width:150%;
+    height:35px;
+    top:45%;
+    left:-20%;
+    transform:rotate(-15deg);
+}
+
+.rua2{
+    width:120%;
+    height:28px;
+    top:20%;
+    left:-10%;
+    transform:rotate(35deg);
+}
+
+.pin{
+    position:absolute;
+    top:48%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:48px;
+}
+
+.etiqueta-mapa{
+    position:absolute;
+    top:62%;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    padding:8px 12px;
+    border-radius:10px;
+    font-size:10px;
+}
+
+.info-local{
+    margin-top:13px;
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:17px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.online{
+    color:var(--verde);
+    font-size:9px;
+}
+
+/* DICAS */
+
+.dica{
+    background:var(--card);
+    border:1px solid var(--borda);
+    padding:17px;
+    border-radius:18px;
+    display:flex;
+    gap:13px;
+    margin-bottom:10px;
+}
+
+.dica-icone{
+    width:42px;
+    height:42px;
+    background:#edf6ef;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    flex-shrink:0;
+}
+
+.dica h3{
+    font-size:13px;
+}
+
+.dica p{
+    color:var(--cinza);
+    font-size:10px;
+    line-height:1.5;
+    margin-top:4px;
+}
+
+/* CONFIGURAÇÕES */
+
+.config{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:17px;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.config strong{
+    font-size:12px;
+}
+
+.config p{
+    color:var(--cinza);
+    font-size:9px;
+    margin-top:4px;
+}
+
+.switch{
+    position:relative;
+    width:42px;
+    height:24px;
+}
+
+.switch input{
+    display:none;
+}
+
+.switch span{
+    position:absolute;
+    inset:0;
+    background:#ccd3ce;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.switch span:after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    top:3px;
+    left:3px;
+    background:white;
+    border-radius:50%;
+    transition:.2s;
+}
+
+.switch input:checked + span{
+    background:var(--verde);
+}
+
+.switch input:checked + span:after{
+    transform:translateX(18px);
+}
+
+/* MENU */
+
+.menu{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    max-width:480px;
+    height:75px;
+    background:rgba(255,255,255,.97);
+    border-top:1px solid var(--borda);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:50;
+}
+
+.menu-btn{
+    border:none;
+    background:transparent;
+    color:#89928d;
+    cursor:pointer;
+    padding:7px 8px;
+    border-radius:12px;
+}
+
+.menu-btn span{
+    display:block;
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+.menu-btn small{
+    font-size:8px;
+}
+
+.menu-btn.ativo{
+    color:var(--verde);
+    background:#eaf7ef;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:90px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:#17221c;
+    color:white;
+    padding:11px 17px;
+    border-radius:12px;
+    font-size:11px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:100;
+}
+
+.toast.mostrar{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* MODO ESCURO */
+
+body.escuro{
+    background:#101512;
+}
+
+body.escuro .app{
+    --fundo:#111714;
+    --card:#19201c;
+    --texto:#f0f4f1;
+    --cinza:#9aa59f;
+    --borda:#29332e;
+}
+
+body.escuro .menu{
+    background:#19201c;
+}
+
+body.escuro .btn-tema{
+    background:#26312b;
+}
+
+body.escuro .mapa{
+    background:#26342b;
+}
+
+body.escuro .rua{
+    background:#34433a;
+}
+
+body.escuro .etiqueta-mapa{
+    background:#19201c;
+    color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:360px){
+
+    .conteudo{
+        padding:15px;
+    }
+
+    .boas-vindas h2{
+        font-size:17px;
+    }
+
+    .acoes{
+        gap:4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= TOPO ================= -->
+
+<header class="topo">
+
+    <div>
+        <div class="logo-pequeno">ECO</div>
+        <h1>EcoLixeira</h1>
+    </div>
+
+    <button class="btn-tema" id="tema">
+        🌙
+    </button>
+
+</header>
+
+
+<!-- ================= CONTEÚDO ================= -->
+
+<main class="conteudo">
+
+
+<!-- ================= INÍCIO ================= -->
+
+<section class="tela ativa" id="inicio">
+
+    <div class="boas-vindas">
+
+        <div>
+
+            <span>Olá! 👋</span>
+
+            <h2>Vamos cuidar do planeta?</h2>
+
+            <p>
+                Acompanhe sua lixeira inteligente
+                e ajude o meio ambiente.
+            </p>
+
+        </div>
+
+        <div class="icone-eco">
+            ♻️
+        </div>
+
+    </div>
+
+
+    <div class="titulo-secao">
+
+        <h2>Status da lixeira</h2>
+
+        <button
+            class="btn-atualizar"
+            id="atualizar">
+            ↻
+        </button>
+
+    </div>
+
+
+    <div class="grid-status">
+
+
+        <div class="card-status">
+
+            <div class="icone-status organic">
+                🌱
+            </div>
+
+            <h3>Orgânico</h3>
+
+            <div class="barra">
+                <div
+                    class="progresso p1"
+                    id="bar1"
+                    style="width:42%">
+                </div>
+            </div>
+
+            <span
+                class="porcentagem"
+                id="porc1">
+                42% cheio
+            </span>
+
+        </div>
+
+
+        <div class="card-status">
+
+            <div class="icone-status reciclavel">
+                ♻️
+            </div>
+
+            <h3>Reciclável</h3>
+
+            <div class="barra">
+                <div
+                    class="progresso p2"
+                    id="bar2"
+                    style="width:68%">
+                </div>
+            </div>
+
+            <span
+                class="porcentagem"
+                id="porc2">
+                68% cheio
+            </span>
+
+        </div>
+
+
+        <div class="card-status">
+
+            <div class="icone-status papel">
+                📄
+            </div>
+
+            <h3>Papel</h3>
+
+            <div class="barra">
+                <div
+                    class="progresso p3"
+                    id="bar3"
+                    style="width:31%">
+                </div>
+            </div>
+
+            <span
+                class="porcentagem"
+                id="porc3">
+                31% cheio
+            </span>
+
+        </div>
+
+
+        <div class="card-status">
+
+            <div class="icone-status metal">
+                🥫
+            </div>
+
+            <h3>Metal</h3>
+
+            <div class="barra">
+                <div
+                    class="progresso p4"
+                    id="bar4"
+                    style="width:82%">
+                </div>
+            </div>
+
+            <span
+                class="porcentagem"
+                id="porc4">
+                82% cheio
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="alerta">
+
+        <span>⚠️</span>
+
+        <div>
+
+            <strong>Atenção!</strong>
+
+            <p>
+                O compartimento de metal está quase cheio.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        Ações rápidas
+    </h2>
+
+
+    <div class="acoes">
+
+        <button
+            class="acao"
+            onclick="abrir('reciclagem')">
+
+            <span>♻️</span>
+            <small>Reciclar</small>
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="abrir('dados')">
+
+            <span>📊</span>
+            <small>Relatórios</small>
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="abrir('localizacao')">
+
+            <span>📍</span>
+            <small>Localização</small>
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="abrir('dicas')">
+
+            <span>💡</span>
+            <small>Dicas</small>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RECICLAGEM ================= -->
+
+<section class="tela" id="reciclagem">
+
+    <div class="titulo-pagina">
+
+        <span>♻️</span>
+
+        <div>
+
+            <h2>Reciclagem</h2>
+
+            <p>
+                Descubra onde colocar cada resíduo.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="pesquisa">
+
+        🔎
+
+        <input
+            id="busca"
+            type="text"
+            placeholder="Digite um material...">
+
+    </div>
+
+
+    <div class="materiais" id="listaMateriais">
+
+
+        <div
+            class="material"
+            data-material="garrafa pet plástico">
+
+            <div class="material-icone">
+                🧴
+            </div>
+
+            <div class="material-info">
+
+                <h3>Garrafa PET</h3>
+
+                <p>Reciclável</p>
+
+            </div>
+
+            <span>♻️</span>
+
+        </div>
+
+
+        <div
+            class="material"
+            data-material="papel">
+
+            <div class="material-icone">
+                📄
+            </div>
+
+            <div class="material-info">
+
+                <h3>Papel</h3>
+
+                <p>Compartimento de papel</p>
+
+            </div>
+
+            <span>📄</span>
+
+        </div>
+
+
+        <div
+            class="material"
+            data-material="lata metal">
+
+            <div class="material-icone">
+                🥫
+            </div>
+
+            <div class="material-info">
+
+                <h3>Lata</h3>
+
+                <p>Compartimento de metal</p>
+
+            </div>
+
+            <span>🥫</span>
+
+        </div>
+
+
+        <div
+            class="material"
+            data-material="restos comida orgânico">
+
+            <div class="material-icone">
+                🍎
+            </div>
+
+            <div class="material-info">
+
+                <h3>Restos de comida</h3>
+
+                <p>Resíduo orgânico</p>
+
+            </div>
+
+            <span>🌱</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DADOS ================= -->
+
+<section class="tela" id="dados">
+
+    <div class="titulo-pagina">
+
+        <span>📊</span>
+
+        <div>
+
+            <h2>Relatórios</h2>
+
+            <p>
+                Veja o impacto da sua reciclagem.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="grande-estatistica">
+
+        <span>Total reciclado</span>
+
+        <strong id="total">
+            127 kg
+        </strong>
+
+        <small>
+            +12% neste mês
+        </small>
+
+    </div>
+
+
+    <div class="grid-estatisticas">
+
+
+        <div class="mini-estatistica">
+
+            <span>♻️</span>
+
+            <strong>63 kg</strong>
+
+            <small>Plástico</small>
+
+        </div>
+
+
+        <div class="mini-estatistica">
+
+            <span>📄</span>
+
+            <strong>31 kg</strong>
+
+            <small>Papel</small>
+
+        </div>
+
+
+        <div class="mini-estatistica">
+
+            <span>🥫</span>
+
+            <strong>22 kg</strong>
+
+            <small>Metal</small>
+
+        </div>
+
+
+        <div class="mini-estatistica">
+
+            <span>🌱</span>
+
+            <strong>11 kg</strong>
+
+            <small>Orgânico</small>
+
+        </div>
+
+    </div>
+
+
+    <div class="grafico">
+
+        <h3>Reciclagem semanal</h3>
+
+        <div class="colunas">
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:45%">
+                </div>
+
+                <small>Seg</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:65%">
+                </div>
+
+                <small>Ter</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:50%">
+                </div>
+
+                <small>Qua</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:80%">
+                </div>
+
+                <small>Qui</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:70%">
+                </div>
+
+                <small>Sex</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:90%">
+                </div>
+
+                <small>Sáb</small>
+
+            </div>
+
+
+            <div class="coluna">
+
+                <div
+                    class="coluna-barra"
+                    style="height:60%">
+                </div>
+
+                <small>Dom</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LOCALIZAÇÃO ================= -->
+
+<section class="tela" id="localizacao">
+
+    <div class="titulo-pagina">
+
+        <span>📍</span>
+
+        <div>
+
+            <h2>Localização</h2>
+
+            <p>
+                Veja onde sua EcoLixeira está instalada.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="mapa">
+
+        <div class="rua rua1"></div>
+        <div class="rua rua2"></div>
+
+        <div class="pin">
+            📍
+        </div>
+
+        <div class="etiqueta-mapa">
+            EcoLixeira #001
+        </div>
+
+    </div>
+
+
+    <div class="info-local">
+
+        <div>
+
+            📍
+
+            <div>
+
+                <strong>
+                    EcoLixeira #001
+                </strong>
+
+                <p>
+                    Unidade principal
+                </p>
+
+            </div>
+
+        </div>
+
+        <span class="online">
+            ● Online
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DICAS ================= -->
+
+<section class="tela" id="dicas">
+
+    <div class="titulo-pagina">
+
+        <span>💡</span>
+
+        <div>
+
+            <h2>Dicas sustentáveis</h2>
+
+            <p>
+                Pequenas atitudes fazem diferença.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dica">
+
+        <div class="dica-icone">
+            💧
+        </div>
+
+        <div>
+
+            <h3>Economize água</h3>
+
+            <p>
+                Feche a torneira enquanto escova
+                os dentes e evite desperdícios.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dica">
+
+        <div class="dica-icone">
+            ♻️
+        </div>
+
+        <div>
+
+            <h3>Separe os resíduos</h3>
+
+            <p>
+                Coloque cada material no
+                compartimento correto.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dica">
+
+        <div class="dica-icone">
+            🛍️
+        </div>
+
+        <div>
+
+            <h3>Evite descartáveis</h3>
+
+            <p>
+                Prefira produtos reutilizáveis
+                sempre que possível.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dica">
+
+        <div class="dica-icone">
+            🌳
+        </div>
+
+        <div>
+
+            <h3>Cuide da natureza</h3>
+
+            <p>
+                Reduzir o lixo ajuda a preservar
+                rios, solos e animais.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONFIGURAÇÕES ================= -->
+
+<section class="tela" id="configuracoes">
+
+    <div class="titulo-pagina">
+
+        <span>⚙️</span>
+
+        <div>
+
+            <h2>Configurações</h2>
+
+            <p>
+                Personalize seu aplicativo.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="config">
+
+        <div>
+
+            <strong>🔔 Notificações</strong>
+
+            <p>
+                Receber alertas da lixeira.
+            </p>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                id="notificacoes"
+                checked>
+
+            <span></span>
+
+        </label>
+
+    </div>
+
+
+    <div class="config">
+
+        <div>
+
+            <strong>📡 Atualização automática</strong>
+
+            <p>
+                Atualizar os dados automaticamente.
+            </p>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                checked>
+
+            <span></span>
+
+        </label>
+
+    </div>
+
+
+    <div class="config">
+
+        <div>
+
+            <strong>📱 Alertas de lixeira cheia</strong>
+
+            <p>
+                Avisar quando um compartimento estiver cheio.
+            </p>
+
+        </div>
+
+
+        <label class="switch">
+
+            <input
+                type="checkbox"
+                checked>
+
+            <span></span>
+
+        </label>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= MENU INFERIOR ================= -->
+
+<nav class="menu">
+
+
+<button
+    class="menu-btn ativo"
+    data-tela="inicio">
+
+    <span>🏠</span>
+    <small>Início</small>
+
+</button>
+
+
+<button
+    class="menu-btn"
+    data-tela="reciclagem">
+
+    <span>♻️</span>
+    <small>Reciclar</small>
+
+</button>
+
+
+<button
+    class="menu-btn"
+    data-tela="dados">
+
+    <span>📊</span>
+    <small>Dados</small>
+
+</button>
+
+
+<button
+    class="menu-btn"
+    data-tela="dicas">
+
+    <span>💡</span>
+    <small>Dicas</small>
+
+</button>
+
+
+<button
+    class="menu-btn"
+    data-tela="configuracoes">
+
+    <span>⚙️</span>
+    <small>Config.</small>
+
+</button>
+
+
+</nav>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast">
+    Mensagem
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* ==========================================
+   NAVEGAÇÃO
+========================================== */
+
+function abrir(nome){
+
+    const telas =
+        document.querySelectorAll(".tela");
+
+    const botoes =
+        document.querySelectorAll(".menu-btn");
+
+
+    telas.forEach(tela => {
+
+        tela.classList.remove("ativa");
+
+    });
+
+
+    const tela =
+        document.getElementById(nome);
+
+    if(tela){
+
+        tela.classList.add("ativa");
+
+    }
+
+
+    botoes.forEach(botao => {
+
+        botao.classList.remove("ativo");
+
+        if(
+            botao.dataset.tela === nome
+        ){
+
+            botao.classList.add("ativo");
+
+        }
+
+    });
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ==========================================
+   MENU
+========================================== */
+
+document
+.querySelectorAll(".menu-btn")
+.forEach(botao => {
+
+    botao.addEventListener(
+        "click",
+        function(){
+
+            abrir(this.dataset.tela);
+
+        }
+    );
+
+});
+
+
+/* ==========================================
+   MODO ESCURO
+========================================== */
+
+const tema =
+    document.getElementById("tema");
+
+tema.addEventListener("click",function(){
+
+    document.body.classList.toggle("escuro");
+
+
+    if(
+        document.body.classList.contains("escuro")
+    ){
+
+        tema.textContent="☀️";
+
+        mostrarToast(
+            "Modo escuro ativado"
+        );
+
+    }else{
+
+        tema.textContent="🌙";
+
+        mostrarToast(
+            "Modo claro ativado"
+        );
+
+    }
+
+});
+
+
+/* ==========================================
+   ATUALIZAR LIXEIRA
+========================================== */
+
+document
+.getElementById("atualizar")
+.addEventListener("click",function(){
+
+    const botao=this;
+
+    botao.style.transform=
+        "rotate(360deg)";
+
+    setTimeout(()=>{
+
+        botao.style.transform=
+            "rotate(0deg)";
+
+    },500);
+
+
+    for(let i=1;i<=4;i++){
+
+        const valor =
+            Math.floor(
+                Math.random()*70
+            )+20;
+
+
+        document
+        .getElementById("bar"+i)
+        .style.width=
+            valor+"%";
+
+
+        document
+        .getElementById("porc"+i)
+        .textContent=
+            valor+"% cheio";
+
+    }
+
+
+    mostrarToast(
+        "Dados atualizados! ✓"
+    );
+
+});
+
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+const busca =
+    document.getElementById("busca");
+
+
+busca.addEventListener(
+    "input",
+    function(){
+
+        const texto =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        document
+        .querySelectorAll(".material")
+        .forEach(material=>{
+
+            const nome =
+                material
+                .dataset
+                .material
+                .toLowerCase();
+
+
+            if(
+                nome.includes(texto)
+            ){
+
+                material.style.display=
+                    "flex";
+
+            }else{
+
+                material.style.display=
+                    "none";
+
+            }
+
+        });
+
+    }
+);
+
+
+/* ==========================================
+   CLICAR NOS MATERIAIS
+========================================== */
+
+document
+.querySelectorAll(".material")
+.forEach(material=>{
+
+    material.addEventListener(
+        "click",
+        function(){
+
+            const nome =
+                this.querySelector("h3")
+                .textContent;
+
+
+            mostrarToast(
+                nome+" selecionado ♻️"
+            );
+
+        }
+    );
+
+});
+
+
+/* ==========================================
+   NOTIFICAÇÕES
+========================================== */
+
+document
+.getElementById("notificacoes")
+.addEventListener(
+    "change",
+    function(){
+
+        if(this.checked){
+
+            mostrarToast(
+                "Notificações ativadas 🔔"
+            );
+
+        }else{
+
+            mostrarToast(
+                "Notificações desativadas"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   TOAST
+========================================== */
+
+function mostrarToast(texto){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent=texto;
+
+    toast.classList.add("mostrar");
+
+
+    clearTimeout(
+        window.timerToast
+    );
+
+
+    window.timerToast =
+        setTimeout(()=>{
+
+            toast.classList.remove(
+                "mostrar"
+            );
+
+        },2200);
+
+}
+
+
+/* ==========================================
+   CLIQUE NOS CARTÕES
+========================================== */
+
+document
+.querySelectorAll(".card-status")
+.forEach(card=>{
+
+    card.addEventListener(
+        "click",
+        function(){
+
+            const nome =
+                this.querySelector("h3")
+                .textContent;
+
+
+            mostrarToast(
+                nome+
+                ": consulte o nível acima."
+            );
+
+        }
+    );
+
+});
+
+
+/* ==========================================
+   INICIALIZAÇÃO
+========================================== */
+
+console.log(
+    "EcoLixeira carregada com sucesso!"
+);
+
+</script>
+
+</body>
+</html>
